@@ -19,19 +19,19 @@ export default function DashBoard({
   const router = useRouter();
 
   return (
-    <div className="flex flex-col p-4 w-full h-full bg-white md:h-screen rounded-lg ">
-      <div className="flex justify-end  items-center ">
+    <div className="flex flex-col p-4 w-full bg-gradient-to-tl from-gray-200  to-gray-300 h-screen">
+      <div className="flex justify-end items-center ">
         <button
           onClick={() => router.push("/")}
           type="button"
-          className="w-40 flex justify-between items-center text-white bg-gradient-to-r from-blue-300 to-green-400 hover:bg-primary-700 focus:ring-4  focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+          className="w-36 rounded-md flex justify-between  border-2 items-center text-white bg-green-800 py-2 px-4"
         >
-          <p>Log Out</p>
-          <LogOut />
+          <div>Log Out</div>
+          <LogOut strokeWidth={2} className="w-5 h-5"/>
         </button>
       </div>
-      <div className="container mx-auto mt-10 grid grid-cols-3 gap-6">
-        <ItemCard  label={"Total Hotels"} value={totalHotels}/>
+      <div className="container w-auto mx-auto pt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-8">
+        <ItemCard  label={"Total Hotels"} value={totalHotels} />
         <ItemCard  label={"Rooms Occupied"} value={occupied}/>
         <ItemCard  label={"Total Rooms"} value={totalRooms}/>
         <ItemCard  label={"Room Revenue"} value={roomRevenue}/>
