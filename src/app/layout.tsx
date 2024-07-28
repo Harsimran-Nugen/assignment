@@ -12,7 +12,7 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <div className="bg-gradient-to-r from-blue-300 to-green-400 flex justify-center items-center 2xl:p-4 h-full w-full gap-12">{children}</div>
+        <div className=" flex justify-center items-center h-full w-full gap-12">{children}</div>
       </body>
     </html>
   );
