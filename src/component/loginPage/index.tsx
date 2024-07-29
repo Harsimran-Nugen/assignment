@@ -1,5 +1,5 @@
 "use client";
-import { UserRound } from "lucide-react";
+import { Loader, UserRound } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import BgImage from "@/images/img3.png";
@@ -11,6 +11,7 @@ function LogIn() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<LoginType>({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
   const validateEmail = (email: string) => {
     const re = /^[a-z0-9_]+@[a-z]+\.[a-z]{2,}$/;
     return re.test(email);
@@ -29,13 +30,16 @@ function LogIn() {
       });
 
       if (response.ok) {
-        const result = await response.json();
+        await response.json();
+
         router.push("/dashboard");
       } else {
         throw new Error("Login failed");
       }
     } catch (err) {
       console.error("Error message:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -60,6 +64,7 @@ function LogIn() {
     if (hasError) {
       setError(generateError);
     } else {
+      setLoading(true);
       fetchData();
     }
   };
@@ -156,10 +161,14 @@ function LogIn() {
             </div>
             <button
               onClick={handleLogin}
+              disabled={loading}
               type="submit"
-              className="w-full text-white bg-blue-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              className="w-full text-black bg-blue-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
-              Login
+              {loading ? (
+              <div className="flex justify-center ">
+                <Loader />
+              </div>): "Login"} 
             </button>
           </form>
         </div>

@@ -13,7 +13,7 @@ export default function DashboardComponent() {
     roomRevenue: 0,
   });
   const fetchDashboardData = () => {
-    fetch("https://cs-api.nugen.co.in/hotel/dashboard", {
+    fetch("http://192.168.29.65:8000/hotel/dashboard", {
       method: "GET",
       headers: {
         Authorization:
@@ -24,16 +24,16 @@ export default function DashboardComponent() {
         if (response?.ok) {
           const data = await response.json();
           setDashboard({
-            totalHotels: data?.totalHotels,
+            totalHotels: data?.totalHotels || 0,
             totalRoomsStatus: {
-              occupied: data?.occupied,
-              vacant: data?.vacant,
+              occupied: data?.occupied || 0,
+              vacant: data?.vacant || 0,
             },
-            foodOrders: data?.foodOrders,
-            foodRevenue: data?.foodRevenue,
-            delayServices: data?.delayServices,
-            runningServices: data?.runningServices,
-            roomRevenue: data?.roomRevenue,
+            foodOrders: data?.foodOrders || 0,
+            foodRevenue: data?.foodRevenue || 0,
+            delayServices: data?.delayServices || 0,
+            runningServices: data?.runningServices || 0,
+            roomRevenue: data?.roomRevenue || 0,
           });
         }
       })
@@ -52,12 +52,12 @@ export default function DashboardComponent() {
     roomRevenue,
   } = dashboard;
   const { occupied, vacant } = totalRoomsStatus;
-
+const totalRooms=occupied + vacant
   return (
     <DashBoard
       totalHotels={totalHotels}
       occupied={occupied}
-      totalRooms={occupied + vacant}
+      totalRooms={totalRooms}
       roomRevenue={roomRevenue}
       foodOrder={foodOrders}
       foodRevenue={foodRevenue}

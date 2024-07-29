@@ -8,7 +8,7 @@ import ItemCard from "./item";
 export default function DashBoard({
   totalHotels,
   occupied,
-  totalRooms,
+ totalRooms,
   roomRevenue,
   foodOrder,
   foodRevenue,
