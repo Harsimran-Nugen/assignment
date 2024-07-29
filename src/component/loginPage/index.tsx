@@ -1,5 +1,5 @@
 "use client";
-import { Loader, UserRound } from "lucide-react";
+import { Eye, EyeOff, Loader, UserRound } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import BgImage from "@/images/img3.png";
@@ -12,6 +12,7 @@ function LogIn() {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<LoginType>({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const validateEmail = (email: string) => {
     const re = /^[a-z0-9_]+@[a-z]+\.[a-z]{2,}$/;
     return re.test(email);
@@ -82,7 +83,7 @@ function LogIn() {
             <div>
               <label
                 htmlFor="email"
-                className="block mb-2 text-sm font-medium text-white "
+                className="block mb-2 pl-2 text-sm font-medium text-white "
               >
                 Your email
               </label>
@@ -112,14 +113,22 @@ function LogIn() {
               )}
             </div>
             <div>
-              <label
-                htmlFor="password"
-                className="block mb-2 text-sm font-medium text-white"
-              >
-                Password
-              </label>
+              <div className="flex justify-between px-2">
+                <label
+                  htmlFor="password"
+                  className="block mb-2 text-sm font-medium text-white"
+                >
+                  Password
+                </label>
+                <div
+                  className="w-5 h-5"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <Eye /> : <EyeOff />}
+                </div>
+              </div>
               <input
-                type="password"
+               type={showPassword ? 'text' : 'password'}
                 name="password"
                 id="password"
                 placeholder="Enter Your Password"
@@ -166,9 +175,12 @@ function LogIn() {
               className="w-full text-black bg-blue-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
               {loading ? (
-              <div className="flex justify-center ">
-                <Loader />
-              </div>): "Login"} 
+                <div className="flex justify-center ">
+                  <Loader />
+                </div>
+              ) : (
+                "Login"
+              )}
             </button>
           </form>
         </div>
