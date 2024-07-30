@@ -31,8 +31,6 @@ function LogIn() {
       });
 
       if (response.ok) {
-        await response.json();
-
         router.push("/dashboard");
       } else {
         throw new Error("Login failed");
@@ -44,8 +42,7 @@ function LogIn() {
     }
   };
 
-  const handleLogin = (event: React.FormEvent) => {
-    event.preventDefault();
+  const handleLogin = () => {
     const generateError = { email: "", password: "" };
     let hasError = false;
 
@@ -80,10 +77,10 @@ function LogIn() {
             <UserRound className="w-10 h-10 mb-3" />
           </div>
           <form className="space-y-4 md:space-y-6" action="#">
-            <div>
+            <div className="flex flex-col gap-y-1">
               <label
                 htmlFor="email"
-                className="block mb-2 pl-2 text-sm font-medium text-white "
+                className="text-sm font-medium px-1 text-white "
               >
                 Your email
               </label>
@@ -91,8 +88,8 @@ function LogIn() {
                 type="email"
                 name="email"
                 id="email"
-                className={`bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-400 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
-                  error.email && "border-red-600"
+                className={`bg-gray-50 border border-gray-300  rounded-lg w-full p-2.5  placeholder-gray-700 text-gray-900 ${
+                  error.email && "border-2 border-red-600"
                 }`}
                 value={email}
                 onChange={(e) => {
@@ -112,11 +109,11 @@ function LogIn() {
                 </div>
               )}
             </div>
-            <div>
-              <div className="flex justify-between px-2">
+            <div className="flex flex-col gap-y-1">
+              <div className="flex justify-between px-1">
                 <label
                   htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-white"
+                  className=" text-sm font-medium text-white"
                 >
                   Password
                 </label>
@@ -132,8 +129,8 @@ function LogIn() {
                 name="password"
                 id="password"
                 placeholder="Enter Your Password"
-                className={`bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-400 dark:border-gray-600 placeholder-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
-                  error.password && "focus:border-red-600"
+                className={`bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  w-full p-2.5  placeholder-gray-700  ${
+                  error.password && "border-2 border-red-600"
                 }`}
                 value={password}
                 onChange={(e) => {
@@ -172,10 +169,10 @@ function LogIn() {
               onClick={handleLogin}
               disabled={loading}
               type="submit"
-              className="w-full text-black bg-blue-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              className="w-full text-white bg-blue-400 hover:bg-blue-500  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               {loading ? (
-                <div className="flex justify-center ">
+                <div className="flex justify-center text-white ">
                   <Loader />
                 </div>
               ) : (

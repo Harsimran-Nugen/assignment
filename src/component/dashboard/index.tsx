@@ -20,7 +20,7 @@ export default function DashBoard({
 
   return (
     <div className="flex flex-col p-4 w-full bg-gradient-to-tl from-gray-200  to-gray-300 h-screen">
-      <div className="flex justify-end items-center ">
+      <div className="flex justify-end items-center font-serif">
         <button
           onClick={() => router.push("/")}
           type="button"
