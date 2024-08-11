@@ -42,7 +42,8 @@ function LogIn() {
     }
   };
 
-  const handleLogin = () => {
+  const handleLogin = (e:React.FormEvent) => {
+    e.preventDefault()
     const generateError = { email: "", password: "" };
     let hasError = false;
 
